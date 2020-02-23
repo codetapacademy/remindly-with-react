@@ -1,3 +1,9 @@
+## Extensions for VS Code
+
+### Editor Config
+
+It's ideal to have https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig installed
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
