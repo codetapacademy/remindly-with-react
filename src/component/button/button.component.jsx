@@ -2,8 +2,9 @@ import React from 'react';
 
 const Button = ({ onClick }) => {
   return (
-    <button onClick={onClick} data-testId="button">
+    <button onClick={onClick} data-testid="button">
       Create
+      <div className="remindly-pencil2"></div>
     </button>
   );
 };

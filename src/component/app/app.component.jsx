@@ -1,7 +1,12 @@
 import React from 'react';
+import { Button } from '../button';
 
 const RecallApp = () => {
-  return <div>Recall App</div>;
+  return (
+    <div>
+      <Button />
+    </div>
+  );
 };
 
 export { RecallApp };
