@@ -1,1 +1,1 @@
-export { RecallApp } from "./app.component";
+export { RecallApp } from './app.component';
