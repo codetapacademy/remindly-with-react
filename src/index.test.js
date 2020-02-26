@@ -1,8 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { renderToDom } from ".";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { renderToDom } from '.';
 
-describe("index", () => {
+describe('index', () => {
   // Cache the original values
   const originalRender = ReactDOM.render;
   const originalSelector = global.document.querySelector;
@@ -18,12 +18,12 @@ describe("index", () => {
     global.document.querySelector = originalSelector;
   });
 
-  it("should call the render method", () => {
+  it('should call the render method', () => {
     // Test the renderToDom method
     renderToDom();
     // See if the mock is getting called
     expect(ReactDOM.render).toHaveBeenCalled();
     // See if the mock is getting called
-    expect(global.document.querySelector).not.toHaveBeenCalled();
+    expect(global.document.querySelector).toHaveBeenCalled();
   });
 });
