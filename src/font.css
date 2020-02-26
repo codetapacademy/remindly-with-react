@@ -1,0 +1,49 @@
+@font-face {
+  font-family: 'remindly';
+  src: url('./fonts/remindly.eot?7sgvvo');
+  src: url('./fonts/remindly.eot?7sgvvo#iefix') format('embedded-opentype'),
+    url('./fonts/remindly.ttf?7sgvvo') format('truetype'),
+    url('./fonts/remindly.woff?7sgvvo') format('woff'),
+    url('./fonts/remindly.svg?7sgvvo#remindly') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^='remindly-'],
+[class*=' remindly-'] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'remindly' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.remindly-pencil2:before {
+  content: '\e906';
+}
+.remindly-calendar:before {
+  content: '\e953';
+}
+.remindly-save:before {
+  content: '\e962';
+}
+.remindly-bin:before {
+  content: '\e9ac';
+}
+.remindly-cross:before {
+  content: '\ea0f';
+}
+.remindly-circle-right:before {
+  content: '\ea42';
+}
+.remindly-circle-left:before {
+  content: '\ea44';
+}
