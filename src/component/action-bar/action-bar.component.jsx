@@ -1,13 +1,27 @@
 import React from 'react';
 import { Button } from '../button';
+import moment from 'moment';
+import { StyledActionBar } from './action-bar.style';
 
 const ActionBar = () => {
+  const selectedMonth = moment().format('MMMM YYYY');
+
   return (
-    <div>
+    <StyledActionBar>
       <Button label="Create">
-        <span className="remindly-pencil2"></span>
+        <i className="remindly-pencil2"></i>
       </Button>
-    </div>
+      <Button label="Today">
+        <i className="remindly-calendar"></i>
+      </Button>
+      <Button label="">
+        <i className="remindly-circle-left"></i>
+      </Button>
+      <Button label="">
+        <i className="remindly-circle-right"></i>
+      </Button>
+      <div>{selectedMonth}</div>
+    </StyledActionBar>
   );
 };
 
