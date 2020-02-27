@@ -1,7 +1,12 @@
 import React from 'react'
+import { Button } from '../button'
 
 const CalendarApp = () => {
-  return <div>Hello</div>
+  return (
+  <div>
+    <Button/>
+  </div>
+  )
 }
 
 export { CalendarApp }
