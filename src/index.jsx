@@ -1,6 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 import { ReamindlyApp } from "./component/app";
+import "./font.css";
 
 const renderToDom = () => {
   const remindlyApp = document.querySelector("#remindly-app");
