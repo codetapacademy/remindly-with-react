@@ -1,9 +1,9 @@
 import React from "react";
-import { Button } from "../button";
+import { ActionBar } from "../action-bar";
 const ReamindlyApp = () => {
   return (
     <div>
-      <Button />
+      <ActionBar />
     </div>
   );
 };

@@ -1,11 +1,11 @@
 import React from "react";
+import { StyledButton } from "./button.style";
 
-const Button = ({ onClick }) => {
+const Button = ({ onClick, label = "hi", children }) => {
   return (
-    <button onClick={onClick} data-testid="nice-button">
-      h1
-      <div className="remindly-pencil"></div>
-    </button>
+    <StyledButton onClick={onClick} data-testid="nice-button">
+      <span>{label}</span> {children}
+    </StyledButton>
   );
 };
 
