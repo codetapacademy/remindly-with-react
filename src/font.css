@@ -1,8 +1,8 @@
 @font-face {
   font-family: "remindly";
-  src: url("./fonts/remindly.ttf?4odkmu") format("truetype"),
-    url("./fonts/remindly.woff?4odkmu") format("woff"),
-    url("./fonts/remindly.svg?4odkmu#remindly") format("svg");
+  src: url("./fonts/remindly.ttf?lwaw6r") format("truetype"),
+    url("./fonts/remindly.woff?lwaw6r") format("woff"),
+    url("./fonts/remindly.svg?lwaw6r#remindly") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -35,6 +35,9 @@
 }
 .remindly-bin:before {
   content: "\e9ac";
+}
+.remindly-plus:before {
+  content: "\ea0a";
 }
 .remindly-cross:before {
   content: "\ea0f";
