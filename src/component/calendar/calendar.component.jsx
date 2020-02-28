@@ -9,23 +9,55 @@ const Calendar = () => {
       .format("dddd")
   );
 
-  const firstDayInMonth = moment()
-    .date(0)
+  // const firstDayInMonth = moment()
+  //   .locale("en-gb")
+  //   .date(1)
+  //   .hour(0)
+  //   .minute(0)
+  //   .second(0);
+  const firstDayInCalendar = moment()
+    .locale("en-gb")
+    .date(1)
     .hour(0)
     .minute(0)
-    .second(0);
-  const firstDayInCalendar = firstDayInMonth.subtract(
-    firstDayInMonth.weekday(),
-    "d"
-  );
+    .second(0)
+    .subtract(
+      moment()
+        .locale("en-gb")
+        .date(1)
+        .hour(3)
+        .minute(0)
+        .second(0)
+        .weekday(),
+      "d"
+    );
+
   // .format();
-  console.log(firstDayInCalendar);
+
+  const firstUnixTime = firstDayInCalendar.unix();
+
+  const dayList = Array.from({ length: 35 }, (_, k) => k)
+    .map(n => ({
+      time: firstUnixTime * 1000 + n * 60 * 60 * 24 * 1000
+    }))
+    .map(({ time }) => ({
+      time,
+      date: moment(time).format("MMMM Do YYYY")
+    }));
+  console.log(dayList);
 
   const renderCalendarHeader = () => {
     return weekDays.map(day => <div key={day}>{day}</div>);
   };
-  console.log(weekDays);
-  return <StyledCalendar>{renderCalendarHeader()}</StyledCalendar>;
+  const renderCalendarBody = () => {
+    return dayList.map(({ date }) => <div key={date}>{date}</div>);
+  };
+  return (
+    <StyledCalendar>
+      {renderCalendarHeader()}
+      {renderCalendarBody()}
+    </StyledCalendar>
+  );
 };
 
 export { Calendar };
