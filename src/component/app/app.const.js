@@ -1,1 +1,2 @@
 export const SET_REMINDED_DATE = "SET_REMINDED_DATE";
+export const UNSET_REMINDER = "UNSET_REMINDER";
