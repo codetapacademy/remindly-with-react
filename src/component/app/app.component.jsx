@@ -27,7 +27,24 @@ const ReamindlyApp = () => {
       {currentReminder && (
         <Modal onClose={onClose}>
           <div>
-            <input type="date" name="" value={dateForInput} />
+            <div>
+              <label htmlFor="date">Date: </label>
+              <input
+                type="date"
+                id="date"
+                value={dateForInput}
+                onChange={() => {}}
+              />
+            </div>
+            <div>
+              <label htmlFor="time">Time: </label>
+              <input
+                type="time"
+                id="time"
+                value={"00:00:00"}
+                onChange={() => {}}
+              />
+            </div>
           </div>
         </Modal>
       )}
