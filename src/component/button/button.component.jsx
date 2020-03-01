@@ -1,13 +1,14 @@
 import React from 'react'
 import { StyledButton } from './button.style'
-const Button = ({ onClick}) => {
+
+const Button = ({ onClick, label = 'helloagain', children }) => {
   return (
-  <button
+  <StyledButton
     onClick={onClick}
     data-testid="nice-button">
-    helloagain
-      <div className="icon-pencil"></div>
-  </button>
+      <span>{label}</span>
+      {children}
+    </StyledButton>
   )
 }
 
