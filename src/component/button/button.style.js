@@ -13,7 +13,7 @@ export const StyledButton = styled.button`
   overflow: hidden;
   cursor: pointer;
 
-  & > div {
+  & > i {
   ${({ label }) => {
     if (!label) {
       return `

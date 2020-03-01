@@ -20,16 +20,21 @@ const Modal = ({
       <StyledModal>
         <StyledModalHeader>
           <Button onClick={onEdit} label="" size="small">
-            <div className="remindly-pencil"></div>
+            <i className="remindly-pencil"></i>
           </Button>
           <Button onClick={onDelete} label="" size="small">
-            <div className="remindly-bin"></div>
+            <i className="remindly-bin"></i>
           </Button>
           <Button onClick={onClose} label="" size="small">
-            <div className="remindly-cross"></div>
+            <i className="remindly-cross"></i>
           </Button>
         </StyledModalHeader>
         <StyledModalBody>{children}</StyledModalBody>
+        <div>
+          <Button onClick={onSuccess} label="Save" size="small">
+            <i className="remindly-save"></i>
+          </Button>
+        </div>
       </StyledModal>
     </StyledModalWrapper>
   );
