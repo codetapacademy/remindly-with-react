@@ -11,7 +11,8 @@ import {
 import {
   unsetReminderAction,
   addReminderToListAction,
-  createReminderAction
+  createReminderAction,
+  deleteReminderAction
 } from "./app.action";
 import moment from "moment";
 
@@ -32,7 +33,7 @@ const ReamindlyApp = () => {
   //     "YYYY-MM-DD"
   //   );
   const dateForInput = moment(
-    ((currentReminder && currentReminder.date) || 0) * 1000
+    (currentReminder && currentReminder.unix) || undefined
   ).format("YYYY-MM-DD");
 
   const title = (currentReminder && currentReminder.title) || "";
@@ -45,6 +46,12 @@ const ReamindlyApp = () => {
   const myTime = useRef();
 
   const onClose = () => {
+    setReminder(unsetReminderAction());
+  };
+
+  const onDelete = () => {
+    // remove the reminder
+    updateReminderList(deleteReminderAction(currentReminder));
     setReminder(unsetReminderAction());
   };
 
@@ -62,7 +69,8 @@ const ReamindlyApp = () => {
         time: myTime.current.value,
         unix:
           moment(`${myDate.current.value} ${myTime.current.value}`).unix() *
-          1000
+          1000,
+        update: (currentReminder && currentReminder.update) || false
       };
 
       updateReminderList(addReminderToListAction(reminder));
@@ -79,7 +87,7 @@ const ReamindlyApp = () => {
         setReminder={setReminder}
       />
       {currentReminder && (
-        <Modal onClose={onClose} onSuccess={onSuccess}>
+        <Modal onClose={onClose} onDelete={onDelete} onSuccess={onSuccess}>
           <div>
             <div>
               <label htmlFor="title">Title: </label>

@@ -40,7 +40,6 @@ const Calendar = ({ reminderList, setReminder, createReminderAction }) => {
       date: moment(unix).format("MMM Do "),
       month: moment(unix).format("MMM")
     }));
-  // console.log(dayList);
 
   const renderCalendarHeader = () => {
     return weekDays.map(day => (
@@ -50,7 +49,6 @@ const Calendar = ({ reminderList, setReminder, createReminderAction }) => {
   const renderCalendarBody = () => {
     const currentMonth = moment().format("MMM");
     return dayList.map(({ date, month, unix }) => {
-      console.log(unix, date);
       const reminderToShowList = reminderList.filter(reminder => {
         return (
           reminder.unix >= unix && reminder.unix < unix + dayInMilliseconds
@@ -68,12 +66,13 @@ const Calendar = ({ reminderList, setReminder, createReminderAction }) => {
                       title,
                       date,
                       time,
-                      unix
+                      unix,
+                      update: true
                     })
                   );
                 };
                 return (
-                  <StyledCalendarReminder onClick={handleReminder}>
+                  <StyledCalendarReminder key={unix} onClick={handleReminder}>
                     {title}
                   </StyledCalendarReminder>
                 );
