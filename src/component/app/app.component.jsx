@@ -8,7 +8,11 @@ import {
   reminderListReducer,
   initialReminderList
 } from "./app.reducer";
-import { unsetReminderAction, addReminderToListAction } from "./app.action";
+import {
+  unsetReminderAction,
+  addReminderToListAction,
+  createReminderAction
+} from "./app.action";
 import moment from "moment";
 
 const ReamindlyApp = () => {
@@ -22,11 +26,19 @@ const ReamindlyApp = () => {
     initialReminderList
   );
 
+  // const dateForInput =
+  //   (currentReminder && currentReminder.date) ||
+  //   moment(((currentReminder && currentReminder.date) || 0) * 1000).format(
+  //     "YYYY-MM-DD"
+  //   );
   const dateForInput = moment(
     ((currentReminder && currentReminder.date) || 0) * 1000
   ).format("YYYY-MM-DD");
 
-  console.log(dateForInput);
+  const title = (currentReminder && currentReminder.title) || "";
+  const time = (currentReminder && currentReminder.time) || "00:00";
+
+  // console.log(dateForInput);
 
   const myTitle = useRef();
   const myDate = useRef();
@@ -54,19 +66,30 @@ const ReamindlyApp = () => {
       };
 
       updateReminderList(addReminderToListAction(reminder));
+      setReminder(unsetReminderAction());
     }
   };
 
   return (
     <div>
       <ActionBar setReminder={setReminder} />
-      <Calendar reminderList={reminderList} />
+      <Calendar
+        reminderList={reminderList}
+        createReminderAction={createReminderAction}
+        setReminder={setReminder}
+      />
       {currentReminder && (
         <Modal onClose={onClose} onSuccess={onSuccess}>
           <div>
             <div>
               <label htmlFor="title">Title: </label>
-              <input ref={myTitle} id="title" maxLength={25} autoFocus />
+              <input
+                defaultValue={title}
+                ref={myTitle}
+                id="title"
+                maxLength={25}
+                autoFocus
+              />
             </div>
             <div>
               <label htmlFor="date">Date: </label>
@@ -79,7 +102,7 @@ const ReamindlyApp = () => {
             </div>
             <div>
               <label htmlFor="time">Time: </label>
-              <input ref={myTime} type="time" id="time" />
+              <input defaultValue={time} ref={myTime} type="time" id="time" />
             </div>
           </div>
         </Modal>

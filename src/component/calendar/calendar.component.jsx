@@ -8,7 +8,7 @@ import {
   StyledCalendarReminderList
 } from "./calendar.style";
 
-const Calendar = ({ reminderList }) => {
+const Calendar = ({ reminderList, setReminder, createReminderAction }) => {
   const dayInMilliseconds = 60 * 60 * 24 * 1000;
   const weekDays = Array.from({ length: 7 }, (_, k) => k + 1).map(n =>
     moment()
@@ -44,24 +44,39 @@ const Calendar = ({ reminderList }) => {
 
   const renderCalendarHeader = () => {
     return weekDays.map(day => (
-      <StyledCalendarReminder key={day}>{day}</StyledCalendarReminder>
+      <StyledCalendarHeader key={day}>{day}</StyledCalendarHeader>
     ));
   };
   const renderCalendarBody = () => {
     const currentMonth = moment().format("MMM");
     return dayList.map(({ date, month, unix }) => {
-      console.log(unix);
+      console.log(unix, date);
       const reminderToShowList = reminderList.filter(reminder => {
-        return reminder.unix > unix && reminder.unix < unix + dayInMilliseconds;
+        return (
+          reminder.unix >= unix && reminder.unix < unix + dayInMilliseconds
+        );
       });
-      console.log();
       return (
         <StyledCalendarCell key={date} inMonth={currentMonth === month}>
           {date}
           {reminderToShowList.length && (
             <StyledCalendarReminderList>
               {reminderToShowList.map(({ title, date, time, unix }) => {
-                return <StyledCalendarReminder>{title}</StyledCalendarReminder>;
+                const handleReminder = () => {
+                  setReminder(
+                    createReminderAction({
+                      title,
+                      date,
+                      time,
+                      unix
+                    })
+                  );
+                };
+                return (
+                  <StyledCalendarReminder onClick={handleReminder}>
+                    {title}
+                  </StyledCalendarReminder>
+                );
               })}
             </StyledCalendarReminderList>
           )}

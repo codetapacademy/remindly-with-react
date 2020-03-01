@@ -12,7 +12,9 @@ const ActionBar = ({ setReminder }) => {
         label="Create"
         onClick={() =>
           setReminder(
-            createReminderAction(createReminderAction(selectedMonth.unix()))
+            createReminderAction(
+              createReminderAction({ date: selectedMonth.unix() })
+            )
           )
         }
       >
