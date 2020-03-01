@@ -31,7 +31,7 @@ export const initialReminderList = [
     time: "19:00",
     unix: 1583348400000
   }
-];
+].sort((a, b) => a.unix - b.unix);
 export const reminderReducer = (state = initialReminderValue, action) => {
   switch (action.type) {
     case SET_REMINDED_DATE:
@@ -48,10 +48,10 @@ export const reminderReducer = (state = initialReminderValue, action) => {
 export const reminderListReducer = (state = [], action) => {
   switch (action.type) {
     case INITIALIZE_REMINDER_LIST:
-      return [...action.list];
+      return [...action.list].sort((a, b) => a.unix - b.unix);
     case ADD_REMINDER_TO_LIST:
       // TODO, return the one that is sorted by unix time ascendent
-      return [...state, action.reminder];
+      return [...state, action.reminder].sort((a, b) => a.unix - b.unix);
     default:
       return state;
   }
