@@ -6,7 +6,7 @@ const Button = ({ onClick}) => {
     onClick={onClick}
     data-testid="nice-button">
     helloagain
-      <div className="calendar-pencil"></div>
+      <div className="icon-pencil"></div>
   </button>
   )
 }
