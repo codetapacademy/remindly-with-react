@@ -9,6 +9,26 @@ export const StyledButton = styled.button`
   border: 0;
   background-color: purple;
   color: white;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  
+  &::after {
+    background-color: white;
+    color: purple;
+    content: '${({ label }) => label}';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: 100ms;
+  }
+
+  &:hover::after {
+    ${({ label }) => label ? 'top: 0' : ''}
+    /* top: 0; */
+  }
 
   & > span:last-child {
     padding-left: 8px;
