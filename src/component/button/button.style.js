@@ -5,5 +5,7 @@ export const StyledButton = styled.button`
   & > span:first-child {
     padding-right: 8px;
   }
-
+  & > span:empty {
+    display: none;
+  }
 `
