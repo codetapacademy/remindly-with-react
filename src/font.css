@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'calendar';
   src:
-    url('./fonts/calendar.ttf?exia4d') format('truetype'),
-    url('./fonts/calendar.woff?exia4d') format('woff'),
-    url('./fonts/calendar.svg?exia4d#calendar') format('svg');
+    url('fonts/calendar.ttf?6pc70r') format('truetype'),
+    url('fonts/calendar.woff?6pc70r') format('woff'),
+    url('fonts/calendar.svg?6pc70r#calendar') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -35,6 +35,9 @@
 }
 .icon-bin:before {
   content: "\e9ac";
+}
+.icon-plus:before {
+  content: "\ea0a";
 }
 .icon-cross:before {
   content: "\ea0f";
