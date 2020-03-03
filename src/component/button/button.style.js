@@ -12,7 +12,7 @@ export const StyledButton = styled.button`
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  
+
   &::after {
     background-color: white;
     color: purple;
