@@ -1,35 +1,24 @@
 import React from 'react'
 import moment from 'moment'
-import { StyledCalendar } from './calendar.style'
+import { StyledCalendar, StyledCalendarHead, StyledCalendarCell } from './calendar.style'
 
 const Calendar = () => {
   const weekdays = Array
     .from({length: 7}, (_, key) => key + 1)
     .map(n => moment().weekday(n).format('dddd'))
 
-  // const firstDayInMonth = moment()
-  //   .locale('en-gb')
-  //   .date(1)
-  //   .hour(0)
-  //   .minute(0)
-  //   .second(0)
-  const firstDayInCalendar = moment()
+  const firstDayInMonth = moment()
     .locale('en-gb')
     .date(1)
-    .hour(3)
+    .hour(0)
     .minute(0)
     .second(0)
+  const firstDayInCalendar = firstDayInMonth
     .subtract (
-      moment()
-        .locale('en-gb')
-        .date(1)
-        .hour(3)
-        .minute(0)
-        .second(0).weekday(),
+      firstDayInMonth.weekday() - 1,
       'd'
-)
+    )
 
-    // .format()
   const firstUnixTime = firstDayInCalendar.unix()
   const dayList = Array
     .from({length: 35}, (_,key) => key)
@@ -38,18 +27,20 @@ const Calendar = () => {
     }))
     .map(({time}) => ({
       time,
-      date: moment(time).format('MMMM Do YYYY')
+      date: moment(time).format('MMMM Do'),
+      month: moment(time).format('MMMM')
     }))
-  console.log(dayList)
+  // console.log(dayList)
 
   const renderCalendarHeader = () => {
     return weekdays.map(day => (
-    <div key={day}>{day}</div>
+    <StyledCalendarHead key={day}>{day}</StyledCalendarHead>
     ))
   }
   const renderCalendarBody = () => {
-    return dayList.map(({date}) => (
-    <div key={date}>{date}</div>
+    const currentMonth = moment().format('MMM')
+    return dayList.map(({ date, month }) => (
+    <StyledCalendarCell key={date} inMonth={currentMonth === month}>{date}</StyledCalendarCell>
     ))
   }
   return (
