@@ -1,1 +1,1 @@
-export { CalendarApp } from './app.component'
+export { ReminderApp } from './app.component'

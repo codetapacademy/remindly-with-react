@@ -1,25 +1,24 @@
-import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
-import { Button } from '.'
+import React from 'react';
+import { render, cleanup, fireEvent } from '@testing-library/react';
+import { Button } from '.';
 import '@testing-library/jest-dom/extend-expect'
 
-describe('#Button', () => {
+describe('@Button', () => {
+afterEach(cleanup);
+
   it('should render a button', () => {
-    const {debug, container, ...all} = render(<Button/>)
-    // console.log(Object.keys(all))
-    const button = container.firstChild
-    // debug()
-    expect(button).toHaveTextContent('helloagain')
+    const { debug, container, ...all } = render(<Button/>);
+    const button = container.firstChild;
+
+    expect(button).toHaveTextContent('hi')
   })
 
   it('should receive a click event', () => {
     const onClick = jest.fn();
-    const { getByTestId } = render(<Button onClick={onClick} />)
-    const button = getByTestId('nice-button')
+    const { getByTestId } = render(<Button onClick={onClick}/>);
+    const button = getByTestId('nice-button');
     fireEvent.click(button)
-    expect(button).toBeTruthy();
-    expect(onClick).toHaveBeenCalled()
-    fireEvent.click(button)
-    expect(onClick).toHaveBeenCalledTimes(2)
+    expect(onClick).toHaveBeenCalled();
   })
 })
+

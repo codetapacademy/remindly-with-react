@@ -1,17 +1,17 @@
-import React from 'react'
-import { StyledButton } from './button.style'
+import React from 'react';
+import { StyledButton } from './button.style';
 
-const Button = ({ onClick, label = 'helloagain', children }) => {
+const Button = ({ onClick, label = 'hey', children }) => {
   return (
-  <StyledButton
-    onClick={onClick}
-    label={label}
-    data-testid="nice-button">
-      <span>{label}</span>
+    <StyledButton 
+      label={label}
+      onClick={onClick}
+      data-testid='nice-button'
+    >
       {children}
+      <span>{label}</span>
     </StyledButton>
   )
 }
-
 
 export { Button }
