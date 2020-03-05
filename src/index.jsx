@@ -1,12 +1,17 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { CalendarApp } from './component./app';
 
-const calendarApp = document.querySelector('#calendar-app')
+const renderToDom = () => {
+  const calendarApp = document.querySelector('#calendar-app')
+  if(calendarApp !== null){
+    render (
+      <CalendarApp />,
+      calendarApp
+    )
+  }
+}
 
-const CalendarApp = () => <div>Hello</div>
+renderToDom()
 
-render (
-  <CalendarApp />,
-  calendarApp
-)
-
+export { renderToDom }
