@@ -1,4 +1,4 @@
-import { SET_REMINDER_DATE } from './app.const';
+import { SET_REMINDER_DATE, UNSET_REMINDER } from './app.const';
 
 export const initialReminderValue = null;
 export const reminderReducer = (state = initialReminderValue, action) => {
@@ -7,6 +7,8 @@ export const reminderReducer = (state = initialReminderValue, action) => {
       return {
         date: action.date
       };
+    case UNSET_REMINDER:
+      return initialReminderValue;
     default:
       return state;
   }
