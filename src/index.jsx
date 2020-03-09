@@ -2,6 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { RecallApp } from './component/app/app.component';
 import './font.css';
+import './index.css';
 
 const renderToDom = () => {
   const recallApp = document.querySelector('#recall-app');
