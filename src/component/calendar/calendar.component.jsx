@@ -3,10 +3,13 @@ import moment from 'moment';
 import {
   StyledCalendar,
   StyledCalendarHead,
-  StyledCalendarCell
+  StyledCalendarCell,
+  StyledCalendarReminder,
+  StyledCalendarReminderList
 } from './calendar.style';
 
-const Calendar = () => {
+const Calendar = ({ reminderList }) => {
+  const dayInMilliseconds = 60 * 60 * 24 * 1000;
   const weekdays = Array.from({ length: 7 }, (_, k) => k + 1).map(day =>
     moment()
       .weekday(day)
@@ -31,12 +34,12 @@ const Calendar = () => {
   // console.log(firstDayInCalendar);
   const dayList = Array.from({ length: 35 }, (_, k) => k)
     .map(n => ({
-      time: firstUnixTime * 1000 + n * 60 * 60 * 24 * 1000
+      unix: firstUnixTime * 1000 + n * dayInMilliseconds
     }))
-    .map(({ time }) => ({
-      time,
-      date: moment(time).format('MMM Do'),
-      month: moment(time).format('MMM')
+    .map(({ unix }) => ({
+      unix,
+      date: moment(unix).format('MMM Do'),
+      month: moment(unix).format('MMM')
     }));
 
   // console.log(dayList);
@@ -48,11 +51,25 @@ const Calendar = () => {
   };
   const renderCalendarBody = () => {
     const currentMonth = moment().format('MMM');
-    return dayList.map(({ date, month }) => (
-      <StyledCalendarCell key={date} inMonth={currentMonth === month}>
-        {date}
-      </StyledCalendarCell>
-    ));
+    return dayList.map(({ date, month, unix }) => {
+      console.log(unix, date);
+      const reminderToShowList = reminderList.filter(reminder => {
+        return reminder.unix > unix && reminder.unix < unix + dayInMilliseconds;
+      });
+      console.log();
+      return (
+        <StyledCalendarCell key={date} inMonth={currentMonth === month}>
+          {date}
+          {reminderToShowList.length && (
+            <StyledCalendarReminderList>
+              {reminderToShowList.map(({ title, date, time, unix }) => {
+                return <StyledCalendarReminder>{title}</StyledCalendarReminder>;
+              })}
+            </StyledCalendarReminderList>
+          )}
+        </StyledCalendarCell>
+      );
+    });
   };
 
   return (

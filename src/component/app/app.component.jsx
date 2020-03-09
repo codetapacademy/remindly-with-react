@@ -62,7 +62,7 @@ const RecallApp = () => {
   return (
     <div>
       <ActionBar setReminder={setReminder} />
-      <Calendar />
+      <Calendar reminderList={reminderList} />
       {currentReminder && (
         <Modal onClose={onClose} onSuccess={onSuccess}>
           <div>
