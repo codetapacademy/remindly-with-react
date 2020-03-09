@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const StyledModalHeader = styled.div``;
+export const StyledModalHeader = styled.div`
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+`;
 
 export const StyledModalBody = styled.div`
   flex-grow: 1;
