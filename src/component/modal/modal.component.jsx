@@ -19,17 +19,22 @@ const Modal = ({
     <StyledModalWrapper>
       <StyledModal>
         <StyledModalHeader>
-          <Button onClick={onEdit} size="small">
-            <div className="remindly-pencil2"></div>
+          <Button onClick={onEdit} label="" size="small">
+            <i className="remindly-pencil2"></i>
           </Button>
-          <Button onClick={onDelete} size="small">
-            <div className="remindly-bin"></div>
+          <Button onClick={onDelete} label="" size="small">
+            <i className="remindly-bin"></i>
           </Button>
-          <Button onClick={onClose} size="small">
-            <div className="remindly-cross"></div>
+          <Button onClick={onClose} label="" size="small">
+            <i className="remindly-cross"></i>
           </Button>
         </StyledModalHeader>
         <StyledModalBody>{children}</StyledModalBody>
+        <div>
+          <Button onClick={onSuccess} label="Save" size="small">
+            <i className="remindly-save"></i>
+          </Button>
+        </div>
       </StyledModal>
     </StyledModalWrapper>
   );

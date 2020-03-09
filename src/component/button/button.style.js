@@ -15,7 +15,7 @@ export const StyledButton = styled.button`
   cursor: pointer;
   position: relative;
 
-  & > div {
+  & > i {
     ${({ label }) => {
       if (!label) {
         return `
