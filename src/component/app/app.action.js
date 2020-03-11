@@ -1,12 +1,12 @@
 import {
-  SET_REMINDER_DATE,
+  SET_REMINDER,
   UNSET_REMINDER,
   ADD_REMINDER_TO_LIST
 } from './app.const';
 
-export const createReminderAction = date => ({
-  type: SET_REMINDER_DATE,
-  date
+export const createReminderAction = reminder => ({
+  type: SET_REMINDER,
+  reminder
 });
 
 export const unsetReminderAction = () => ({

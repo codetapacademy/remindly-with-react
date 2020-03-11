@@ -1,5 +1,5 @@
 import {
-  SET_REMINDER_DATE,
+  SET_REMINDER,
   UNSET_REMINDER,
   INITIALIZE_REMINDER_LIST,
   ADD_REMINDER_TO_LIST
@@ -34,9 +34,9 @@ export const initialReminderList = [
 ].sort((a, b) => a.unix - b.unix);
 export const reminderReducer = (state = initialReminderValue, action) => {
   switch (action.type) {
-    case SET_REMINDER_DATE:
+    case SET_REMINDER:
       return {
-        date: action.date
+        ...action.reminder
       };
     case UNSET_REMINDER:
       return initialReminderValue;
@@ -50,7 +50,7 @@ export const reminderListReducer = (state = [], action) => {
     case INITIALIZE_REMINDER_LIST:
       return [...action.list].sort((a, b) => a.unix - b.unix);
     case ADD_REMINDER_TO_LIST:
-      // TODO, return the one that is sorted by unix time ascending
+      // TODO: return the one that is sorted by unix time ascending
       return [...state, action.reminder].sort((a, b) => a.unix - b.unix);
     default:
       return state;
