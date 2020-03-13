@@ -1,13 +1,13 @@
 import React from 'react'
+import { StyledButton } from './button.style'
 
-const Button = ({ onClick }) => 
-  <button 
+const Button = ({ onClick, label, children }) => 
+  <StyledButton 
     onClick={onClick}
     data-testid="awesome-button">
-    Hohoho
-    <div className="remind-arrow-left"></div>
-    <div className="remind-arrow-right"></div>
-  </button>
+    <span>{label}</span>
+    {children}
+  </StyledButton>
 
 
 export { Button }

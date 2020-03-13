@@ -1,11 +1,11 @@
 import React from 'react'
-import { Button } from '../button'
+import { Actionbar } from '../action-bar'
 
 const CalendarApp = () => {
   return (
     <div>
       <div>Hello</div>
-      <Button />
+      <Actionbar />
     </div>
   )
 }
