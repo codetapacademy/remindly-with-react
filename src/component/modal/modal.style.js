@@ -16,8 +16,8 @@ export const StyledModal = styled.div`
   border-radius: 1rem;
   overflow: hidden;
   min-height: 150px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-gap: 10px;
 `;
 
 export const StyledModalWrapper = styled.div`
