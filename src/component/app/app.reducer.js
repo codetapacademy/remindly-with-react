@@ -2,7 +2,8 @@ import {
   SET_REMINDER,
   UNSET_REMINDER,
   INITIALIZE_REMINDER_LIST,
-  ADD_REMINDER_TO_LIST
+  ADD_REMINDER_TO_LIST,
+  DELETE_REMINDER
 } from './app.const';
 
 export const initialReminderValue = null;
@@ -49,7 +50,17 @@ export const reminderListReducer = (state = [], action) => {
   switch (action.type) {
     case INITIALIZE_REMINDER_LIST:
       return [...action.list].sort((a, b) => a.unix - b.unix);
+    case DELETE_REMINDER:
+      return state.filter(reminder => reminder.unix !== action.reminder.unix);
     case ADD_REMINDER_TO_LIST:
+      // debugger;
+      if (action.reminder.update) {
+        return state.map(reminder =>
+          reminder.unix === action.reminder.unix
+            ? { ...action.reminder, update: false }
+            : reminder
+        );
+      }
       // TODO: return the one that is sorted by unix time ascending
       return [...state, action.reminder].sort((a, b) => a.unix - b.unix);
     default:

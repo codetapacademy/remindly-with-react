@@ -11,7 +11,8 @@ import {
 import {
   unsetReminderAction,
   addReminderToListAction,
-  createReminderAction
+  createReminderAction,
+  deleteReminderAction
 } from './app.action';
 import moment from 'moment';
 
@@ -20,6 +21,7 @@ const RecallApp = () => {
     reminderReducer,
     initialReminderValue
   );
+  // debugger;
 
   const [reminderList, updateReminderList] = useReducer(
     reminderListReducer,
@@ -32,9 +34,9 @@ const RecallApp = () => {
   //     'YYYY-MM-DD'
   //   );
   const dateForInput = moment(
-    ((currentReminder && currentReminder.date) || 0) * 1000
+    (currentReminder && currentReminder.unix) || undefined
   ).format('YYYY-MM-DD');
-  // console.log(dateForInput, currentReminder);
+  console.log(dateForInput, currentReminder);
   const title = (currentReminder && currentReminder.title) || '';
   const time = (currentReminder && currentReminder.time) || '00:00';
 
@@ -44,6 +46,12 @@ const RecallApp = () => {
 
   const onClose = () => {
     // close the modal
+    setReminder(unsetReminderAction());
+  };
+
+  const onDelete = () => {
+    // removes a reminder
+    updateReminderList(deleteReminderAction(currentReminder));
     setReminder(unsetReminderAction());
   };
 
@@ -62,7 +70,8 @@ const RecallApp = () => {
         time: myTime.current.value,
         unix:
           moment(`${myDate.current.value} ${myTime.current.value}`).unix() *
-          1000
+          1000,
+        update: (currentReminder && currentReminder.update) || false
       };
 
       updateReminderList(addReminderToListAction(reminder));
@@ -79,7 +88,7 @@ const RecallApp = () => {
         reminderList={reminderList}
       />
       {currentReminder && (
-        <Modal onClose={onClose} onSuccess={onSuccess}>
+        <Modal onClose={onClose} onDelete={onDelete} onSuccess={onSuccess}>
           <div>
             <div>
               <label htmlFor="title">Title: </label>
