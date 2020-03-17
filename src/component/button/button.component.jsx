@@ -9,5 +9,4 @@ const Button = ({ onClick, label, children }) =>
     {children}
   </StyledButton>
 
-
 export { Button }
