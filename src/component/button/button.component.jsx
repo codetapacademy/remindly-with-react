@@ -5,8 +5,8 @@ const Button = ({ onClick, label, children }) =>
   <StyledButton 
     onClick={onClick}
     data-testid="awesome-button">
-    <span>{label}</span>
     {children}
+    <span>{label}</span>
   </StyledButton>
 
 export { Button }

@@ -45,3 +45,6 @@
 .remind-calendar:before {
   content: "\e904";
 }
+.remind-plus:before {
+  content: "\ea0a";
+}

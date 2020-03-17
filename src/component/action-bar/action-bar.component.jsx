@@ -8,7 +8,7 @@ const Actionbar = () => {
   return (
     <StyledActionBar>
       <Button label="Create">
-        <i className="remind-pencil"></i>
+        <i className="remind-plus"></i>
       </Button>
       <Button label="Today">
         <i className="remind-calendar"></i>
