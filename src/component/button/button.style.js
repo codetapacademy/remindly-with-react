@@ -27,7 +27,6 @@ export const StyledButton = styled.button `
 
   &:hover::after {
     ${({ label }) => label ? 'top: 0' : ''}
-    /* ; */
   }
 
   & > span:last-child {
