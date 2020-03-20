@@ -1,25 +1,20 @@
 import React from 'react'
 import moment from 'moment'
-import { StyledCalendar } from './calendar.style'
+import { StyledCalendar, StyledCalendarHead, StyledCalendarCell} from './calendar.style'
 
 const Calendar = () => {
-  const weekDays = Array.from({length: 7}, (_, key) => key + 1).map(n => moment().weekday(n).format('dddd'))
-  console.log(weekDays)
+  const weekDays = Array.from({length: 7}, (_, key) => key + 1)
+    .map(n => moment().weekday(n).format('dddd'))
 
-  const firstDayInCalendar = moment()
+  const firstDayInMonth = moment()
     .locale('en-gb')
     .date(1)
     .hour(0)
     .minute(0)
     .second(0)
+  const firstDayInCalendar = firstDayInMonth
     .subtract(
-      moment()
-        .locale('en-gb')
-        .date(1)
-        .hour(0)
-        .minute(0)
-        .second(0)
-        .weekday(),
+      firstDayInMonth.weekday() - 1,
       'd'
     )
 
@@ -31,14 +26,16 @@ const Calendar = () => {
       }))
       .map(({time}) => ({
         time,
-        date: moment(time).format('MMMM Do YYYY')
+        date: moment(time).format('MMMM Do'),
+        month: moment(time).format('MMMM')
       }))
 
-  console.log(dayList)
-
-  const displayCalendarHeader = () => weekDays.map( day => (<div key={day}>{day}</div>))
+  const displayCalendarHeader = () => weekDays.map( day => (<StyledCalendarHead key={day}>{day}</StyledCalendarHead>))
   
-  const displayCalendarBody = () => dayList.map( ({date}) => (<div key={date}>{date}</div>))
+  const displayCalendarBody = () => {
+    const currentMonth = moment().format('MMMM')
+    return dayList.map( ({date, month}) => (<StyledCalendarCell key={date} inMonth={currentMonth === month}>{date}</StyledCalendarCell>))
+  }
 
   return (
     <StyledCalendar>
