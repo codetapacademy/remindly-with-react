@@ -2,12 +2,15 @@ import React from 'react';
 import { Button } from '../button'
 import moment from 'moment'
 import { StyledActionBar } from './action-bar.style';
+import { createReminderAction } from '../app/app.action';
 
-const selectMonth = moment().format('MMMM YYYY')
-const Actionbar = () => {
+const Actionbar = ({ setReminder }) => {
+  const selectMonth = moment()
   return (
     <StyledActionBar>
-      <Button label="Create">
+      <Button 
+        label="Create"
+        onClick={() => setReminder(createReminderAction(selectMonth.unix()))}>
         <i className="remind-plus"></i>
       </Button>
       <Button label="Today">
@@ -19,7 +22,7 @@ const Actionbar = () => {
       <Button>
         <i className="remind-arrow-right"></i>
       </Button>
-      <div>{selectMonth}</div>
+      <div>{selectMonth.format('MMMM YYYY')}</div>
     </StyledActionBar>
   )
 }

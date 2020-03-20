@@ -1,14 +1,18 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 import { Actionbar } from '../action-bar'
 import { Calendar } from '../calendar'
 import { Modal } from '../modal'
+import { reminderReducer, initialReminderValue } from './app.reducer'
 
 const CalendarApp = () => {
+  const [currentReminder, setReminder] = useReducer(reminderReducer, initialReminderValue)
+  // console.log(currentReminder)
+
   return (
     <div>
-      <Actionbar />
+      <Actionbar setReminder={setReminder}/>
       <Calendar />
-      <Modal />
+      {currentReminder && <Modal />}
     </div>
   )
 }
