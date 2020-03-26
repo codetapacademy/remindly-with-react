@@ -7,19 +7,24 @@ const Modal = ({ children, onClose, onEdit, onDelete, onSuccess, onCancel }) => 
     <StyledModalWrapper>
       <StyledModal>
         <StyledModalHeader>
-          <Button onClick={onEdit}>
-            <div className="remind-pencil"></div>
+          <Button onClick={onEdit} label="">
+            <i className="remind-pencil"></i>
           </Button>
-          <Button onClick={onDelete}>
-            <div className="remind-bin"></div>
+          <Button onClick={onDelete} label="">
+            <i className="remind-bin"></i>
           </Button>
-          <Button onClick={onClose}>
-            <div className="remind-cross"></div>
+          <Button onClick={onClose} label="">
+            <i className="remind-cross"></i>
           </Button>
         </StyledModalHeader>
         <StyledModalBody>
           {children}
         </StyledModalBody>
+          <div>
+            <Button onClick={onSuccess} label="Save">
+              <i className="remind-saver"></i>
+            </Button>
+          </div>
       </StyledModal>
     </StyledModalWrapper>
   )

@@ -19,8 +19,8 @@ padding: 1rem;
 border-radius: 1rem;
 overflow: hidden;
 min-height: 150px;
-display: flex;
-flex-direction: column;
+display: grid;
+grid-gap: 20px;
 `
 
 export const StyledModalHeader = styled.div `

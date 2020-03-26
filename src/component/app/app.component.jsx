@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, { useReducer, useRef } from 'react'
 import { Actionbar } from '../action-bar'
 import { Calendar } from '../calendar'
 import { Modal } from '../modal'
@@ -10,8 +10,20 @@ const CalendarApp = () => {
   const [currentReminder, setReminder] = useReducer(reminderReducer, initialReminderValue)
   // console.log(currentReminder)
 
+  const awesomeTitle = useRef()
+  const awesomeDate = useRef()
+  const awesomeTime = useRef()
+
   const onClose = () => {
     setReminder(unsetReminderAction())
+  }
+
+  const onSuccess = () => {
+    console.log(
+      awesomeTitle.current.value,
+      awesomeDate.current.value,
+      awesomeTime.current.value,
+    )
   }
 
   const dateForInput = moment((currentReminder && currentReminder.date || 0) * 1000).format('YYYY-MM-DD')
@@ -21,25 +33,34 @@ const CalendarApp = () => {
     <div>
       <Actionbar setReminder={setReminder}/>
       <Calendar />
-      {currentReminder && (<Modal onClose={onClose}>
+      {currentReminder && (
+        <Modal onClose={onClose} onSuccess={onSuccess}>
           <div>
+            <div>
+              <label htmlFor="title">Title: </label>
+              <input 
+                ref={awesomeTitle}
+                type="title" 
+                id="title"
+                maxLength={25}
+                autoFocus
+              />
+            </div>
             <div>
               <label htmlFor="date">Date: </label>
               <input 
-                data-date-format="YYYY MM DD"
+                ref={awesomeDate}
+                defaultValue={dateForInput}
                 type="date" 
                 id="date"
-                value={dateForInput}
-                onChange={() => {}}
               />
             </div>
             <div>
               <label htmlFor="time">Time: </label>
               <input 
+                ref={awesomeTime}
                 type="time" 
                 id="time"
-                value={'00:00'}
-                onChange={() => {}}
               />
             </div>
           </div>
