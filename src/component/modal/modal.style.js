@@ -24,7 +24,8 @@ flex-direction: column;
 `
 
 export const StyledModalHeader = styled.div `
-
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 `
 
 export const StyledModalBody = styled.div `
