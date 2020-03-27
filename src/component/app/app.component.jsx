@@ -2,13 +2,15 @@ import React, { useReducer, useRef } from 'react'
 import { Actionbar } from '../action-bar'
 import { Calendar } from '../calendar'
 import { Modal } from '../modal'
-import { reminderReducer, initialReminderValue } from './app.reducer'
-import { unsetReminderAction } from './app.action'
+import { reminderReducer, initialReminderValue, reminderListReducer, initialReminderList } from './app.reducer'
+import { unsetReminderAction, addReminderToListAction } from './app.action'
 import moment from 'moment'
 
 const CalendarApp = () => {
   const [currentReminder, setReminder] = useReducer(reminderReducer, initialReminderValue)
   // console.log(currentReminder)
+
+  const [reminderList, updateReminderList] = useReducer(reminderListReducer, initialReminderList)
 
   const awesomeTitle = useRef()
   const awesomeDate = useRef()
@@ -19,11 +21,25 @@ const CalendarApp = () => {
   }
 
   const onSuccess = () => {
-    console.log(
-      awesomeTitle.current.value,
-      awesomeDate.current.value,
-      awesomeTime.current.value,
-    )
+    // the console.log will work only if value is added in the modal.
+    if (awesomeTitle.current.value &&
+      awesomeDate.current.value &&
+      awesomeTime.current.value) {
+        console.log(
+          awesomeTitle.current.value,
+          awesomeDate.current.value,
+          awesomeTime.current.value,
+        )
+
+        const reminder = {
+          title: awesomeTitle.current.value,
+          date: awesomeDate.current.value,
+          time: awesomeTime.current.value,
+          unix: moment(`${awesomeDate.current.value} ${awesomeTime.current.value}`).unix() * 1000
+        }
+
+        updateReminderList(addReminderToListAction(reminder))
+      }
   }
 
   const dateForInput = moment((currentReminder && currentReminder.date || 0) * 1000).format('YYYY-MM-DD')
@@ -65,6 +81,10 @@ const CalendarApp = () => {
             </div>
           </div>
         </Modal>)}
+
+        <pre>
+          {JSON.stringify(reminderList, null, 2)}
+        </pre>
     </div>
   )
 }
