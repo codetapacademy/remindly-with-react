@@ -3,18 +3,30 @@ import { SET_REMINDER_DATE, UNSET_REMINDER, INITIALIZE_REMINDER_LIST, ADD_REMIND
 export const initialReminderValue = null
 export const initialReminderList = [
   {
-    "title": "2345r",
+    "title": "Mega meeting",
+    "date": "2020-04-03",
+    "time": "13:02",
+    "unix": 1585915320000
+  },
+  {
+    "title": "Let's meet",
+    "date": "2020-05-03",
+    "time": "21:03",
+    "unix": 1588536180000
+  },
+  {
+    "title": "5000 people Meeting",
     "date": "2020-03-27",
     "time": "04:02",
     "unix": 1585281720000
   },
   {
-    "title": "2345r3214r",
+    "title": "Awesome meeting later",
     "date": "2020-03-27",
     "time": "22:23",
     "unix": 1585347780000
   }
-]
+].sort((a, b) => a.unix - b.unix)
 export const reminderReducer = (state = initialReminderValue, action) => {
   switch(action.type) {
     case SET_REMINDER_DATE:
@@ -33,7 +45,7 @@ export const reminderListReducer = (state = [], action) => {
     case INITIALIZE_REMINDER_LIST:
       return [...action.list]
     case ADD_REMINDER_TO_LIST:
-      return [...state, action.reminder]
+      return [...state, action.reminder].sort((a, b) => a.unix - b.unix)
     default:
       return state
   }

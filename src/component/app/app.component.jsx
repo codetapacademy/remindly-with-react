@@ -17,6 +17,7 @@ const CalendarApp = () => {
   const awesomeTime = useRef()
 
   const onClose = () => {
+    // close the modal
     setReminder(unsetReminderAction())
   }
 
@@ -47,8 +48,8 @@ const CalendarApp = () => {
 
   return (
     <div>
-      <Actionbar setReminder={setReminder}/>
-      <Calendar />
+      <Actionbar setReminder={setReminder} />
+      <Calendar reminderList={reminderList} />
       {currentReminder && (
         <Modal onClose={onClose} onSuccess={onSuccess}>
           <div>
