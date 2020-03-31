@@ -3,7 +3,7 @@ import { Actionbar } from '../action-bar'
 import { Calendar } from '../calendar'
 import { Modal } from '../modal'
 import { reminderReducer, initialReminderValue, reminderListReducer, initialReminderList } from './app.reducer'
-import { unsetReminderAction, addReminderToListAction } from './app.action'
+import { unsetReminderAction, addReminderToListAction, createReminderAction } from './app.action'
 import moment from 'moment'
 
 const CalendarApp = () => {
@@ -11,6 +11,14 @@ const CalendarApp = () => {
   // console.log(currentReminder)
 
   const [reminderList, updateReminderList] = useReducer(reminderListReducer, initialReminderList)
+
+  // const dateForInput = (currentReminder && currentReminder.date)
+  const dateForInput = moment((currentReminder && currentReminder.date || 0) * 1000).format('YYYY-MM-DD')
+  // console.log(dateForInput, currentReminder)
+
+  const title = (currentReminder && currentReminder.title) || ''
+  const time = (currentReminder && currentReminder.title) || '00:00'
+
 
   const awesomeTitle = useRef()
   const awesomeDate = useRef()
@@ -40,22 +48,27 @@ const CalendarApp = () => {
         }
 
         updateReminderList(addReminderToListAction(reminder))
+        setReminder(unsetReminderAction())
       }
   }
 
-  const dateForInput = moment((currentReminder && currentReminder.date || 0) * 1000).format('YYYY-MM-DD')
-  console.log(dateForInput, currentReminder)
+
 
   return (
     <div>
       <Actionbar setReminder={setReminder} />
-      <Calendar reminderList={reminderList} />
+      <Calendar 
+        reminderList={reminderList} 
+        createReminderAction={createReminderAction}
+        setReminder={setReminder}
+        />
       {currentReminder && (
-        <Modal onClose={onClose} onSuccess={onSuccess}>
+        <Modal onClose={onClose} onSuccess={onSuccess} >
           <div>
             <div>
               <label htmlFor="title">Title: </label>
               <input 
+                defaultValue={title}
                 ref={awesomeTitle}
                 type="title" 
                 id="title"
@@ -75,6 +88,7 @@ const CalendarApp = () => {
             <div>
               <label htmlFor="time">Time: </label>
               <input 
+                defaultValue={time}
                 ref={awesomeTime}
                 type="time" 
                 id="time"
