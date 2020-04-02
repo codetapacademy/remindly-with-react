@@ -2,7 +2,7 @@ import React from 'react'
 import { StyledModalWrapper, StyledModalBody, StyledModalHeader, StyledModal  } from './modal.style'
 import { Button } from '../button'
 
-const Modal = ({ children, onClose, onEdit, onDelete, onSuccess, onCancel }) => {
+const Modal = ({ children, onClose, onEdit, onDelete, onSuccess }) => {
   return (
     <StyledModalWrapper>
       <StyledModal>

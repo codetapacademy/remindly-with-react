@@ -36,7 +36,6 @@ const Calendar = ({ reminderList, setReminder, createReminderAction }) => {
   const displayCalendarBody = () => {
     const currentMonth = moment().format('MMMM')
     return dayList.map( ({ date, month, unix }) => {
-      console.log(unix, date)
       const reminderToShowList = reminderList.filter(reminder => {
         return reminder.unix >= unix && reminder.unix < unix + dayInMiliseconds
       })
@@ -53,11 +52,12 @@ const Calendar = ({ reminderList, setReminder, createReminderAction }) => {
                   title,
                   date,
                   time,
-                  unix
+                  unix,
+                  update: true,
                 }))
               }
               return (
-                <StyledCalendarReminder onClick={handleReminder}>{title}</StyledCalendarReminder>
+                <StyledCalendarReminder key={unix} onClick={handleReminder}>{title}</StyledCalendarReminder>
               )
             })}
           </StyledCalendarReminderWrapperList>}

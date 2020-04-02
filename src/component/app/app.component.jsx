@@ -3,21 +3,21 @@ import { Actionbar } from '../action-bar'
 import { Calendar } from '../calendar'
 import { Modal } from '../modal'
 import { reminderReducer, initialReminderValue, reminderListReducer, initialReminderList } from './app.reducer'
-import { unsetReminderAction, addReminderToListAction, createReminderAction } from './app.action'
+import { unsetReminderAction, addReminderToListAction, createReminderAction, deleteReminderAction } from './app.action'
 import moment from 'moment'
 
 const CalendarApp = () => {
   const [currentReminder, setReminder] = useReducer(reminderReducer, initialReminderValue)
-  // console.log(currentReminder)
 
   const [reminderList, updateReminderList] = useReducer(reminderListReducer, initialReminderList)
 
   // const dateForInput = (currentReminder && currentReminder.date)
-  const dateForInput = moment((currentReminder && currentReminder.date || 0) * 1000).format('YYYY-MM-DD')
-  // console.log(dateForInput, currentReminder)
+  const dateForInput = moment((currentReminder && currentReminder.unix || undefined)).format('YYYY-MM-DD')
+  console.log('dateForInput', dateForInput)
+  console.log('currentReminder', currentReminder && currentReminder)
 
   const title = (currentReminder && currentReminder.title) || ''
-  const time = (currentReminder && currentReminder.title) || '00:00'
+  const time = (currentReminder && currentReminder.time) || '00:00'
 
 
   const awesomeTitle = useRef()
@@ -40,18 +40,26 @@ const CalendarApp = () => {
           awesomeTime.current.value,
         )
 
+        console.log(currentReminder)
+
         const reminder = {
           title: awesomeTitle.current.value,
           date: awesomeDate.current.value,
           time: awesomeTime.current.value,
-          unix: moment(`${awesomeDate.current.value} ${awesomeTime.current.value}`).unix() * 1000
+          unix: moment(`${awesomeDate.current.value} ${awesomeTime.current.value}`).unix() * 1000,
+          update: (currentReminder && currentReminder.update) || false,
         }
 
         updateReminderList(addReminderToListAction(reminder))
-        setReminder(unsetReminderAction())
+        
       }
   }
 
+  const onDelete = () => {
+    // delete/remove a reminder
+    updateReminderList(deleteReminderAction(currentReminder))
+    setReminder(unsetReminderAction())
+  }
 
 
   return (
@@ -63,7 +71,12 @@ const CalendarApp = () => {
         setReminder={setReminder}
         />
       {currentReminder && (
-        <Modal onClose={onClose} onSuccess={onSuccess} >
+        <Modal
+          onClose={onClose}
+          onSuccess={onSuccess}
+          onDelete={onDelete}
+
+        >
           <div>
             <div>
               <label htmlFor="title">Title: </label>
