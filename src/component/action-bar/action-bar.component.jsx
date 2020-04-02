@@ -10,7 +10,7 @@ const Actionbar = ({ setReminder }) => {
     <StyledActionBar>
       <Button 
         label="Create"
-        onClick={() => setReminder(createReminderAction(selectMonth.unix()))}>
+        onClick={() => setReminder(createReminderAction({ date: selectMonth.unix() }))}>
         <i className="remind-plus"></i>
       </Button>
       <Button label="Today">

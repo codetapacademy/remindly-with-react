@@ -1,8 +1,9 @@
 import React from 'react'
 import moment from 'moment'
-import { StyledCalendar, StyledCalendarHead, StyledCalendarCell} from './calendar.style'
+import { StyledCalendar, StyledCalendarHead, StyledCalendarCell, StyledCalendarReminder, StyledCalendarReminderWrapperList } from './calendar.style'
 
-const Calendar = () => {
+const Calendar = ({ reminderList, setReminder, createReminderAction }) => {
+  const dayInMiliseconds = 60*60*24*1000
   const weekDays = Array.from({length: 7}, (_, key) => key + 1)
     .map(n => moment().weekday(n).format('dddd'))
 
@@ -22,20 +23,46 @@ const Calendar = () => {
     const dayList = Array
       .from({length: 35}, (_, key) => key)
       .map (n => ({
-        time: firstUnixTime*1000 + n*60*60*24*1000
+        unix: firstUnixTime * 1000 + n * dayInMiliseconds
       }))
-      .map(({time}) => ({
-        time,
-        date: moment(time).format('MMMM Do'),
-        month: moment(time).format('MMMM')
+      .map(({ unix }) => ({
+        unix,
+        date: moment(unix).format('MMMM Do'),
+        month: moment(unix).format('MMMM')
       }))
 
   const displayCalendarHeader = () => weekDays.map( day => (<StyledCalendarHead key={day}>{day}</StyledCalendarHead>))
   
   const displayCalendarBody = () => {
     const currentMonth = moment().format('MMMM')
-    return dayList.map( ({date, month}) => (<StyledCalendarCell key={date} inMonth={currentMonth === month}>{date}</StyledCalendarCell>))
-  }
+    return dayList.map( ({ date, month, unix }) => {
+      const reminderToShowList = reminderList.filter(reminder => {
+        return reminder.unix >= unix && reminder.unix < unix + dayInMiliseconds
+      })
+      return (
+      <StyledCalendarCell 
+        key={date} 
+        inMonth={currentMonth === month}
+        >
+          {date}
+          {reminderToShowList.length && <StyledCalendarReminderWrapperList>
+            {reminderToShowList.map(({ title, date, time, unix}) => {
+              const handleReminder = () => {
+                setReminder(createReminderAction({
+                  title,
+                  date,
+                  time,
+                  unix,
+                  update: true,
+                }))
+              }
+              return (
+                <StyledCalendarReminder key={unix} onClick={handleReminder}>{title}</StyledCalendarReminder>
+              )
+            })}
+          </StyledCalendarReminderWrapperList>}
+        </StyledCalendarCell>)}
+    )}
 
   return (
     <StyledCalendar>
